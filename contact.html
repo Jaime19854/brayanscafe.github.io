@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan's Café - Contact</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .footer { text-align: center; padding: 10px; }
+        .section-title {
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            color: #5A2D0C;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <!-- Logo with link to about.html -->
+                <a class="navbar-brand" href="index.html">
+                    <img src="logo.png" alt="Bryan's Cafe Logo" style="height: 40px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container mt-4">
+        <!-- Title Section -->
+        <div class="section-title">Contact Us</div>
+
+        <!-- Contact Form -->
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <form id="contactForm">
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="section-title mt-5">Our Locations</div>
+        <div id="locationsGrid" class="row justify-content-center">
+            <!-- Las ubicaciones se cargarán dinámicamente aquí desde el XML -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+        <p>&copy; <span id="currentYear"></span> Copyright Bryan's Cafe All rights reserved. | <a href="privacy.html" target="_blank">Privacy Policy</a></p>
+    </footer>
+
+    <!-- JavaScript para el año dinámico en el pie de página -->
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Mensaje de confirmación en el envío del formulario
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert("Your message has been sent successfully!");
+            document.getElementById('contactForm').reset();
+        });
+
+        // Cargar dinámicamente las ubicaciones desde contact.xml
+        function loadLocations() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'contact.xml', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const xmlDoc = xhr.responseXML;
+                    const locations = xmlDoc.getElementsByTagName('location');
+                    const locationsGrid = document.getElementById('locationsGrid');
+
+                    // Recorrer cada ubicación en el XML
+                    for (let i = 0; i < locations.length; i++) {
+                        const name = locations[i].getElementsByTagName('name')[0].textContent;
+                        const address = locations[i].getElementsByTagName('address')[0].textContent;
+                        const phone = locations[i].getElementsByTagName('phone')[0].textContent;
+                        const weekdayHours = locations[i].getElementsByTagName('weekday')[0].textContent;
+                        const weekendHours = locations[i].getElementsByTagName('weekend')[0].textContent;
+                        const mapUrl = locations[i].getElementsByTagName('map')[0].textContent;
+
+                        // Crear la columna y tarjeta para cada ubicación
+                        const col = document.createElement('div');
+                        col.classList.add('col-lg-4', 'mb-4');
+
+                        const card = `
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">${name}</h5>
+                                    <p class="card-text">${address}</p>
+                                    <p class="card-text">Phone: ${phone}</p>
+                                    <p class="card-text">Opening Hours:</p>
+                                    <p class="card-text">Weekdays: ${weekdayHours}</p>
+                                    <p class="card-text">Weekends: ${weekendHours}</p>
+                                    <a href="${mapUrl}" target="_blank" class="btn btn-outline-secondary btn-sm">View on Google Maps</a>
+                                </div>
+                            </div>
+                        `;
+                        col.innerHTML = card;
+                        locationsGrid.appendChild(col);
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        // Cargar ubicaciones cuando la página carga
+        window.onload = loadLocations;
+    </script>
+
+    <!-- Bootstrap JS con Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

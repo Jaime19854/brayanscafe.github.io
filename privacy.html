@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan's Café - Privacy Policy</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .footer { text-align: center; padding: 10px; }
+        .section-title {
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-top: 20px;
+            color: #5A2D0C;
+        }
+        .section-content {
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <!-- Logo with link to about.html -->
+                <a class="navbar-brand" href="index.html">
+                    <img src="logo.png" alt="Bryan's Cafe Logo" style="height: 40px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container mt-4">
+        <!-- Title Section -->
+        <div class="section-title"></div>
+        
+        <!-- Privacy Policy Content -->
+        <div id="privacyContent">
+            <!-- El contenido de la política se cargará aquí dinámicamente desde el XML -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+        <p>&copy; <span id="currentYear"></span> Copyright Bryan's Cafe All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript para el año dinámico en el pie de página -->
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Cargar dinámicamente la Política de Privacidad desde privacy.xml
+        function loadPrivacyPolicy() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'privacy.xml', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const xmlDoc = xhr.responseXML;
+                    const sections = xmlDoc.getElementsByTagName('section');
+                    const privacyContent = document.getElementById('privacyContent');
+
+                    // Recorrer cada sección en el XML
+                    for (let i = 0; i < sections.length; i++) {
+                        const title = sections[i].getElementsByTagName('title')[0].textContent;
+                        const content = sections[i].getElementsByTagName('content')[0].textContent;
+
+                        // Crear HTML para cada sección
+                        const sectionHTML = `
+                            <h2 class="section-title">${title}</h2>
+                            <p class="section-content">${content}</p>
+                        `;
+                        privacyContent.innerHTML += sectionHTML;
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        // Cargar Política de Privacidad al cargar la página
+        window.onload = loadPrivacyPolicy;
+    </script>
+
+    <!-- Bootstrap JS con Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

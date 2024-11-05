@@ -1,0 +1,3 @@
+<!ELEMENT banner (image, altText)>
+<!ELEMENT image (#PCDATA)>
+<!ELEMENT altText (#PCDATA)>

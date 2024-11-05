@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan's Café</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .banner img {
+            width: 100%;
+            max-width: 722px;
+            height: auto;
+        }
+        .section-title {
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .section-content {
+            text-align: justify; /* Justificar el texto */
+        }
+        .section-image img {
+            width: 263px; /* Establecer el ancho de la imagen */
+            height: 230px; /* Establecer la altura de la imagen */
+            object-fit: cover; /* Mantiene la proporción de la imagen */
+        }
+        .footer { text-align: center; padding: 10px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <!-- Logo with link to about.html -->
+                <a class="navbar-brand" href="index.html">
+                    <img src="logo.png" alt="Bryan's Cafe Logo" style="height: 40px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner Section -->
+    <section class="banner text-center mt-4">
+        <div id="bannerContent"></div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about container mt-4">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-4 text-center section-image" id="aboutImage"></div>
+            <div class="col-md-6">
+                <div class="section-title">About</div>
+                <div class="section-content" id="aboutText"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section class="history container mt-4">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+                <div class="section-title">History</div>
+                <div class="section-content" id="historyText"></div>
+            </div>
+            <div class="col-md-4 text-center section-image" id="historyImage"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+        <p>&copy; <span id="currentYear"></span> Copyright Bryan's Cafe All rights reserved. | <a href="privacy.html" target="_blank">Privacy Policy</a></p>
+    </footer>
+
+    <!-- JavaScript to load content from XML -->
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Load content from XML
+        function loadContent() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'content.xml', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    const xmlDoc = xhr.responseXML;
+
+                    // Load Banner
+                    const banner = xmlDoc.getElementsByTagName('banner')[0];
+                    const bannerImage = banner.getElementsByTagName('image')[0].textContent;
+                    const bannerAltText = banner.getElementsByTagName('altText')[0].textContent;
+                    document.getElementById('bannerContent').innerHTML = `<img src="${bannerImage}" alt="${bannerAltText}" class="img-fluid">`;
+
+                    // Load About Section
+                    const about = xmlDoc.getElementsByTagName('about')[0];
+                    const aboutImage = about.getElementsByTagName('image')[0].textContent;
+                    const aboutText = about.getElementsByTagName('text')[0].textContent;
+                    document.getElementById('aboutImage').innerHTML = `<img src="${aboutImage}" alt="About Image">`;
+                    document.getElementById('aboutText').innerHTML = `<p>${aboutText}</p>`;
+
+                    // Load History Section
+                    const history = xmlDoc.getElementsByTagName('history')[0];
+                    const historyImage = history.getElementsByTagName('image')[0].textContent;
+                    const historyText = history.getElementsByTagName('text')[0].textContent;
+                    document.getElementById('historyImage').innerHTML = `<img src="${historyImage}" alt="History Image">`;
+                    document.getElementById('historyText').innerHTML = `<p>${historyText}</p>`;
+                }
+            };
+            xhr.send();
+        }
+
+        // Load content when the page loads
+        window.onload = loadContent;
+    </script>
+
+    <!-- Bootstrap JS with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+

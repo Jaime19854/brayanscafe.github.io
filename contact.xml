@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE contact SYSTEM "contact.dtd">
+<contact>
+    <locations>
+        <location>
+            <name>Surry Hills</name>
+            <address>76 Devonshire St, Surry Hills, NSW</address>
+            <phone>02 9211 1234</phone>
+            <hours>
+                <weekday>Mon - Fri: 6:00 to 14:30</weekday>
+                <weekend>Sat-Sun: 7:00 to 15:00</weekend>
+            </hours>
+            <map>https://www.google.com/maps/place/76+Devonshire+St,+Surry+Hills+NSW+2010/@-33.885934,151.2051437,17z/data=!3m1!4b1!4m6!3m5!1s0x6b12ae21aea44cd5:0xcf2d54666d7cca73!8m2!3d-33.8859385!4d151.2077186!16s%2Fg%2F11c26pzd8y?entry=ttu&amp;g_ep=EgoyMDI0MTAyOS4wIKXMDSoASAFQAw%3D%3D</map>
+        </location>
+        <location>
+            <name>Haymarket Sydney</name>
+            <address>451 Pitt St, Haymarket Sydney, NSW</address>
+            <phone>02 9262 5678</phone>
+            <hours>
+                <weekday>Mon - Fri: 6:00 to 16:00</weekday>
+                <weekend>Sat-Sun: 7:00 to 15:00</weekend>
+            </hours>
+            <map>https://www.google.com/maps/place/451+Pitt+St,+Sydney+NSW+2000/@-33.8796134,151.2042445,17z/data=!3m1!4b1!4m6!3m5!1s0x6b12ae23192f282b:0x506728c0b18a4f49!8m2!3d-33.8796179!4d151.2068194!16s%2Fg%2F11c5f9whm6?entry=ttu&amp;g_ep=EgoyMDI0MTAyOS4wIKXMDSoASAFQAw%3D%3D</map>
+        </location>
+        <location>
+            <name>Circular Quay</name>
+            <address>31 Alfred Street, Circular Quay, NSW</address>
+            <phone>02 8971 9101</phone>
+            <hours>
+                <weekday>Mon - Fri: 6:00 to 16:00</weekday>
+                <weekend>Sat-Sun: 7:00 to 15:00</weekend>
+            </hours>
+            <map>https://www.google.com/maps/place/31+Alfred+St,+Sydney+NSW+2000/@-33.8621849,151.208331,17z/data=!3m1!4b1!4m6!3m5!1s0x6b12ae69daa2f96f:0x735f85193da40a66!8m2!3d-33.8621894!4d151.2109059!16s%2Fg%2F12xptsbqw?entry=ttu&amp;g_ep=EgoyMDI0MTAyOS4wIKXMDSoASAFQAw%3D%3D</map>
+        </location>
+    </locations>
+</contact>

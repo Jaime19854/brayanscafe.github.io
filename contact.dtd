@@ -1,0 +1,10 @@
+<!ELEMENT contact (locations)>
+<!ELEMENT locations (location+)>
+<!ELEMENT location (name, address, phone, hours, map)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT address (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT hours (weekday, weekend)>
+<!ELEMENT weekday (#PCDATA)>
+<!ELEMENT weekend (#PCDATA)>
+<!ELEMENT map (#PCDATA)>

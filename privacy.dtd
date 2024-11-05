@@ -1,0 +1,4 @@
+<!ELEMENT privacy (section+)>
+<!ELEMENT section (title, content)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT content (#PCDATA)>
